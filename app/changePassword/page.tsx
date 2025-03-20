@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react"; // Import FormEvent
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabaseClient";
 import styles from "./changePassword.module.css";
@@ -23,7 +23,8 @@ function ChangePassword() {
     checkAuth();
   }, [router]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
+    // Specify the type of 'e' as FormEvent
     e.preventDefault();
     setMessage("");
     setError("");
