@@ -25,6 +25,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({ userData }) => {
   const [email, setEmail] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const user = useAppSelector((state) => state.auth.user);
+  const [initialFormData, setInitialFormData] = useState<UserData>(userData); // New state for initial data
 
   // Fetch user details from Supabase
   useEffect(() => {
@@ -39,10 +40,16 @@ const ProfileInput: React.FC<ProfileInputProps> = ({ userData }) => {
 
           if (!error && data) {
             setFormData(data);
+            setInitialFormData(data); // Set initial data when fetching
+          } else {
+            setInitialFormData(userData); // Set default data if no data is fetched
+            setFormData(userData);
           }
           console.log(data);
         } catch (error) {
           console.error("Error fetching user details:", error);
+          setInitialFormData(userData); // Set default data on error
+          setFormData(userData);
         }
       }
     };
@@ -56,7 +63,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({ userData }) => {
 
     fetchUserDetails();
     fetchUserEmail();
-  }, [user?.id]);
+  }, [user?.id, userData]); //userData added to dependency array
 
   const handleChange = (key: keyof UserData, value: string) => {
     setFormData({ ...formData, [key]: value });
@@ -65,8 +72,14 @@ const ProfileInput: React.FC<ProfileInputProps> = ({ userData }) => {
   const handleSave = async () => {
     if (isEditing) {
       try {
+        // Use initial values if not changed
         const dataToSave = {
           ...formData,
+          gender: formData.gender || initialFormData.gender || "Male", // Default to "Male" if not set
+          document_type:
+            formData.document_type ||
+            initialFormData.document_type ||
+            "National ID", // Default to "National ID" if not set
           email: user?.email,
           user_id: user?.id,
         };
@@ -79,6 +92,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({ userData }) => {
           console.error("Error saving data:", error);
         } else {
           console.log("Data saved successfully");
+          setInitialFormData(dataToSave); // Update initial data after successful save
         }
       } catch (error) {
         console.error("Error:", error);
