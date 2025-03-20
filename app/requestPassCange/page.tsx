@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react"; // Import ChangeEvent and FormEvent
 import styles from "./requestPassChange.module.css";
 import MainText from "../UIComponents/MainText";
 import { supabase } from "../lib/supabaseClient";
@@ -10,11 +10,13 @@ function RequestPasswordReset() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // Specify the type of 'e' as ChangeEvent<HTMLInputElement>
     setEmail(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
+    // Specify the type of 'e' as FormEvent
     e.preventDefault();
     setMessage("");
     setError("");
