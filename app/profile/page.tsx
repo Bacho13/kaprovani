@@ -8,19 +8,6 @@ import { checkSession, handleAuthStateChange } from "../Redux/lib/auth";
 import { useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 
-// Custom Image Loader
-const myImageLoader = ({
-  src,
-  width,
-  quality,
-}: {
-  src: string;
-  width: number;
-  quality?: number;
-}) => {
-  return `${src}?w=${width}&q=${quality || 75}`;
-};
-
 function Page() {
   const user = useAppSelector((state) => state.auth.user);
   const defaultUserData = {
@@ -31,6 +18,7 @@ function Page() {
     document_id: "",
   };
   const [avatarUrl, setAvatarUrl] = useState<string>("/images/noImage.png");
+  const [avatarVersion, setAvatarVersion] = useState<number>(0); // New state for cache busting
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -51,7 +39,7 @@ function Page() {
 
         if (imageUrl) {
           try {
-            const response = await fetch(imageUrl);
+            const response = await fetch(`${imageUrl}?v=${avatarVersion}`); // Add cache-busting query parameter
             if (response.ok) {
               setAvatarUrl(imageUrl);
             } else {
@@ -71,7 +59,7 @@ function Page() {
     };
 
     fetchAvatar();
-  }, [user?.id]);
+  }, [user?.id, avatarVersion]); // Add avatarVersion to the dependency array
 
   const handleImageClick = () => {
     if (fileInputRef.current) {
@@ -86,6 +74,7 @@ function Page() {
     if (!file) return;
 
     try {
+      setIsLoading(true); // Start loading
       const { error } = await supabase.storage
         .from("avatars")
         .upload(`${user?.id}.png`, file, {
@@ -96,13 +85,14 @@ function Page() {
       if (error) {
         console.error("Error uploading image:", error);
       } else {
-        const { data } = await supabase.storage
-          .from("avatars")
-          .getPublicUrl(`${user?.id}.png`);
-        setAvatarUrl(data.publicUrl);
+        // Update the avatarVersion to trigger a re-fetch
+        setAvatarVersion((prevVersion) => prevVersion + 1);
+        //setAvatarUrl(data.publicUrl); // Remove this line
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -122,12 +112,11 @@ function Page() {
               onMouseLeave={() => setIsHovered(false)}
             >
               <Image
-                src={avatarUrl}
+                src={`${avatarUrl}?v=${avatarVersion}`} // Add cache-busting query parameter here too
                 width={200}
                 height={150}
                 alt="user pic"
                 style={{ objectFit: "cover" }}
-                loader={myImageLoader}
                 priority
               />
               {isHovered && (

@@ -12,7 +12,7 @@
   align-items: center;
   height: 100vh;
 }
-ას .content {
+.content {
   width: 50vw;
   height: 100vh;
   background-color: var(--green);
