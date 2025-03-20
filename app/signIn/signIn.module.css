@@ -1,0 +1,124 @@
+.page {
+  background-image: url("../../public/images/mainImg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  width: 50vw;
+  height: 100vh;
+  background-color: var(--green);
+}
+
+.mainTextContainer {
+  margin-top: 3.125rem;
+  margin-bottom: 6.25rem;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 70%;
+}
+
+.emailContainer,
+.passwordContainer,
+.confirmPasswordContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  font-family: montserrat, sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 3.125rem;
+  background-color: transparent;
+  border-bottom: 0.0625rem solid var(--white);
+  padding-bottom: 0.3125rem;
+  padding-left: 0.625rem;
+  outline: none;
+  color: var(--white);
+}
+
+.input:-webkit-autofill {
+  background: transparent !important;
+  font-size: 1.25rem !important;
+  font-family: montserrat, sans-serif !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.emailLabel,
+.confirmPasswordLabel,
+.passwordLabel {
+  margin-bottom: 1.25rem;
+  font-family: montserrat, sans-serif !important;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.registerButton,
+.GoogleRegisterButton {
+  background: transparent;
+  border: 0.0625rem solid var(--white);
+  color: var(--white);
+  font-size: 0.9375rem;
+  font-family: montserrat, sans-serif;
+  text-transform: uppercase;
+  padding: 0.625rem 4.375rem;
+  width: 15rem;
+  height: 2.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registerButton:hover,
+.GoogleRegisterButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.registerButton:focus,
+.GoogleRegisterButton:focus {
+  outline: 0.125rem solid var(--white);
+}
+
+.orRegisterViaGoogle,
+.alreadyRegistered {
+  font-family: cinzel, serif !important;
+  margin: 1.25rem 0;
+  font-size: 0.8125rem;
+}
+
+.aInQuestion {
+  color: var(--white);
+}
+
+@media (max-width: 48rem) {
+  .content {
+    width: 100vw;
+  }
+}

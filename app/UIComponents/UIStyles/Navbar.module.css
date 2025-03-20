@@ -1,0 +1,119 @@
+/* Navbar.module.css */
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 1.25rem 0;
+  left: 0;
+  z-index: 50;
+  font-family: var(--montserrat);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0.625rem 1.25rem;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.navGroup {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.userGroup {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  transition: all 0.3s ease-in-out;
+  margin-left: 9.375rem;
+}
+
+.navItem {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 1rem;
+  padding: 0.3125rem 0;
+  border-bottom: 0.125rem solid transparent;
+  transition: border-bottom 0.3s ease-in-out;
+}
+
+.navItem:hover {
+  border-bottom: 0.0625rem white solid;
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--green);
+}
+
+.closeButton {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .menuButton {
+    display: block;
+  }
+
+  .closeButton {
+    display: block;
+    margin-left: 12.5rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: auto;
+    overflow-y: scroll;
+    width: 90vw;
+    background: var(--green);
+    opacity: 0.9;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.3125rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navGroup,
+  .userGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9375rem;
+    margin-left: 0;
+  }
+
+  .userGroup {
+    margin-top: 3.125rem;
+  }
+
+  .navLinks.show {
+    display: flex;
+  }
+
+  .navItem {
+    padding: 0.9375rem;
+    display: block;
+    text-align: center;
+  }
+}

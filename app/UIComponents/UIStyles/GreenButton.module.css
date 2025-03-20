@@ -1,0 +1,10 @@
+.greenButton {
+  background-color: var(--green);
+  border: 1px solid var(--white);
+  color: var(--white);
+  padding: 10px 70px;
+  font-family: montserrat;
+  cursor: pointer;
+  width: 230px;
+  height: 40px;
+}

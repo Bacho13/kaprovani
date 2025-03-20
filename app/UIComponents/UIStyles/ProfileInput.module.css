@@ -1,0 +1,50 @@
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.label {
+  margin-bottom: 10px;
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  font-family: Cinzel;
+  width: 100%;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  font-family: montserrat, sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 3.125rem;
+  background-color: transparent;
+  border-bottom: 0.0625rem solid var(--white);
+  padding-bottom: 0.3125rem;
+  padding-left: 0.625rem;
+  outline: none;
+  color: var(--white);
+}
+
+.input:-webkit-autofill {
+  background: transparent !important;
+  font-size: 1.25rem !important;
+  font-family: montserrat, sans-serif !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.inputOption {
+  background-color: var(--green);
+}
+.button {
+  background-color: var(--green);
+  border: 1px solid var(--white);
+  color: var(--white);
+  padding: 10px 70px;
+  font-family: montserrat;
+  cursor: pointer;
+  width: 230px;
+  height: 40px;
+}

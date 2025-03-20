@@ -1,0 +1,111 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  gap: 20px;
+}
+
+.rightContainer {
+  width: 60%;
+  background-color: #f0f0f0; /* Example background for right container */
+  min-height: 300px; /* Example minimum height */
+}
+
+.imageContainer {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover .imageOverlay {
+  opacity: 1;
+}
+
+.overlayText {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Responsive Design for Smartphones */
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column; /* Stack containers vertically */
+    align-items: center;
+    padding: 10px;
+  }
+
+  .leftContainer,
+  .rightContainer {
+    width: 100%; /* Take full width */
+  }
+
+  .imageContainer {
+    width: 150px; /* Smaller image size */
+    height: 112.5px;
+  }
+
+  .overlayText {
+    font-size: 12px; /* Smaller text */
+  }
+}
+
+/* Loading Indicator Styles */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Take full viewport height */
+}
+
+.loadingSpinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
