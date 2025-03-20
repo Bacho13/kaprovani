@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { z } from "zod";
 import styles from "./register.module.css";
 import MainText from "../UIComponents/MainText";
 import { supabase } from "../lib/supabaseClient"; // Import supabase client
+import { handleSignInViaGoogle } from "../Redux/lib/auth";
+import { useRouter } from "next/navigation"; // Correct import
+import Link from "next/link"; // Import Link
 
 // Zod validation schema
 const registerSchema = z
@@ -27,6 +30,7 @@ type FormData = {
 };
 
 function Register() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -39,7 +43,7 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Validate form data using Zod
@@ -67,13 +71,12 @@ function Register() {
       setSuccessMessage(
         "Registration successful! Please check your email for a confirmation link."
       );
-      console.log(data);
     }
   };
 
-  const handleGoogleRegister = () => {
-    console.log("Register with Google clicked");
-    // Add Google OAuth logic here
+  const handleSignUpViaGoogle = async () => {
+    let { data, error } = await handleSignInViaGoogle();
+    router.push("/"); // Redirect after login
   };
 
   return (
@@ -146,15 +149,15 @@ function Register() {
                 <button
                   type="button"
                   className={styles.GoogleRegisterButton}
-                  onClick={handleGoogleRegister}
+                  onClick={handleSignUpViaGoogle}
                 >
                   G Register
                 </button>
                 <p className={styles.alreadyRegistered}>
                   Are you already registered?{" "}
-                  <a className={styles.aInQuestion} href="/signIn">
+                  <Link className={styles.aInQuestion} href="/signIn">
                     Sign in here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
