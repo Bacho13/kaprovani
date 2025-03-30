@@ -3,13 +3,18 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+.firstView {
+  height: 100vh;
 }
 
 .pageContent {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 .mainTextContainer {
   margin-top: 300px;

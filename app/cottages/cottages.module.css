@@ -1,0 +1,12 @@
+.mainContainer {
+  width: 100%;
+  background-color: var(--green);
+
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+}

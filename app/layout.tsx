@@ -6,6 +6,7 @@ import { StoreProvider } from "./Redux/storeProvider";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
+  weight: ["400", "700"], // Add the weights you need
 });
 const montserrat = Montserrat({
   subsets: ["latin"],

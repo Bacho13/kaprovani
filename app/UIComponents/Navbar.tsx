@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./UIStyles/Navbar.module.css";
 import { UserRound, X } from "lucide-react";
@@ -9,8 +9,8 @@ import {
   handleAuthStateChange,
   handleSignOut,
 } from "../Redux/lib/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState, useAppSelector } from "../Redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "../Redux/store";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabaseClient";
 
@@ -25,15 +25,12 @@ const userLinks = [
   { name: "REGISTER", href: "/register" },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const user = useAppSelector((state) => state.auth.user);
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // State for scroll
   const dispatch = useDispatch<AppDispatch>();
-
-  const userMetadata = useAppSelector(
-    (state) => state.auth.user?.user_metadata
-  );
   const router = useRouter();
 
   useEffect(() => {
@@ -50,8 +47,25 @@ const Navbar: React.FC = () => {
     console.log(user);
   }, [user]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+        console.log("Scrolled: true");
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={` ${isScrolled ? styles.scrolled : styles.navbar}`}>
       <div className={styles.container}>
         {/* Hamburger Menu for Mobile */}
         <button

@@ -9,7 +9,11 @@
   z-index: 50;
   font-family: var(--montserrat);
 }
-
+.navbar.scrolled {
+  /* Green background when scrolled */
+  background-color: var(--green); /* Green background when scrolled */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+}
 .container {
   display: flex;
   justify-content: center;

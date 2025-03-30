@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { supabase } from "../lib/supabaseClient";
 
 function Page() {
+  const [photos, setPhotos] = useState([]);
   const user = useAppSelector((state) => state.auth.user);
   const defaultUserData = {
     full_name: "",
